@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Product Filter</title>
+    <style>
+        body { font-family: Arial; }
+        .product {
+            border: 1px solid gray;
+            padding: 10px;
+            margin: 10px;
+            width: 200px;
+        }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <h1>Products</h1>
+    
+    <select id="filter">
+        <option value="all">All</option>
+        <option value="electronics">Electronics</option>
+        <option value="clothing">Clothing</option>
+    </select>
+    
+    <div id="products">
+        <div class="product electronics">
+            <h3>Wireless Headphones</h3>
+            <p>$129.99</p>
+        </div>
+        <div class="product clothing">
+            <h3>Cotton T-Shirt</h3>
+            <p>$24.99</p>
+        </div>
+        <div class="product electronics">
+            <h3>Bluetooth Speaker</h3>
+            <p>$89.99</p>
+        </div>
+        <div class="product clothing">
+            <h3>Denim Jeans</h3>
+            <p>$59.99</p>
+        </div>
+    </div>
+
+    <script>
+        const filter = document.getElementById("filter");
+        const products = document.querySelectorAll(".product");
+        
+        filter.addEventListener("change", function() {
+            const selected = this.value;
+            
+            products.forEach(product => {
+                if(selected === "all" || product.classList.contains(selected)) {
+                    product.classList.remove("hidden");
+                } else {
+                    product.classList.add("hidden");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
