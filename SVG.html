@@ -1,24 +1,105 @@
+<!--
+    File Name   : exp2_3.html
+    Experiment : Experiment 2.3
+    Title      : Drawing Board
+    Objective  : To create a simple drawing board where users can draw
+                 using mouse events, change colors, undo strokes,
+                 and clear the canvas using HTML, CSS, and JavaScript.
+-->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Simple Draw</title>
+    <meta charset="UTF-8">
+    <title>Drawing Board</title>
     <style>
-        #canvas{border:1px solid #000;width:100%;height:400px}
-        button{margin:5px;padding:8px}
-        .color{width:25px;height:25px;display:inline-block;cursor:pointer;margin:5px}
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            margin: 0;
+            background-color: #ffffff;
+        }
+        .header {
+            background-color: #1f2a37;
+            color: white;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h2 {
+            margin: 0;
+        }
+        .nav a {
+            color: white;
+            margin-left: 20px;
+            text-decoration: underline;
+            font-size: 15px;
+        }
+        .container {
+            text-align: center;
+            padding: 30px;
+        }
+        .container h1 {
+            margin-bottom: 25px;
+        }
+        .controls {
+            margin-bottom: 15px;
+        }
+        button {
+            padding: 8px 14px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .color {
+            width: 25px;
+            height: 25px;
+            display: inline-block;
+            cursor: pointer;
+            margin: 5px;
+            border: 1px solid #000;
+        }
+        .board-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        svg {
+            width: 700px;
+            height: 350px;
+            border: 6px solid blue;
+            background-color: #fff;
+        }
     </style>
 </head>
 <body>
-    <h3>Draw Here</h3>
-    <div>
-        <button onclick="undo()">Undo</button>
-        <button onclick="clearAll()">Clear</button>
-        <div style="margin:10px 0">
+    <div class="header">
+        <h2>Experiment 2</h2>
+        <div class="nav">
+            <a href="#">Experiment 2.1</a>
+            <a href="#">Experiment 2.2</a>
+            <a href="#">Experiment 2.3</a>
+        </div>
+    </div>
+    <div class="container">
+        <h1>Drawing Board</h1>
+        <div class="controls">
+            <button onclick="undo()">Undo</button>
+            <button onclick="clearAll()">Clear</button>
+            <br>
             <div class="color" style="background:black" onclick="setColor('black')"></div>
             <div class="color" style="background:red" onclick="setColor('red')"></div>
         </div>
+        <div class="board-wrapper">
+            <svg id="canvas"
+                 onmousedown="start(event)"
+                 onmousemove="draw(event)"
+                 onmouseup="stop()"
+                 onmouseleave="stop()">
+            </svg>
+        </div>
     </div>
-    <svg id="canvas" onmousedown="start(event)" onmousemove="draw(event)" onmouseup="stop()"></svg>
     <script>
         const svg = document.getElementById('canvas');
         let color = 'black';
@@ -34,7 +115,7 @@
             svg.appendChild(path);
         }
         function draw(e) {
-            if(!drawing || !path) return;
+            if (!drawing || !path) return;
             let d = path.getAttribute('d');
             path.setAttribute('d', d + ` L ${e.offsetX} ${e.offsetY}`);
         }
@@ -45,11 +126,14 @@
             color = c;
         }
         function undo() {
-            if(svg.lastChild) svg.removeChild(svg.lastChild);
+            if (svg.lastChild) {
+                svg.removeChild(svg.lastChild);
+            }
         }
-        
         function clearAll() {
-            while(svg.firstChild) svg.removeChild(svg.firstChild);
+            while (svg.firstChild) {
+                svg.removeChild(svg.firstChild);
+            }
         }
     </script>
 </body>
