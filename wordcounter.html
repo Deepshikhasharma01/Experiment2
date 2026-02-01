@@ -1,105 +1,118 @@
+<!--
+    File Name   : exp2_1.html
+    Experiment : Experiment 2.1
+    Title      : Word / Character Counter
+    Objective  : To count the number of characters entered by the user
+                 and display it dynamically using JavaScript.
+-->
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Character Counter</title>
+    <meta charset="UTF-8">
+    <title>Experiment 2.1 - Word Counter</title>
+
     <style>
-        body {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
             font-family: Arial, sans-serif;
-            max-width: 500px;
-            margin: 50px auto;
-            padding: 20px;
-            background: #f5f5f5;
         }
-        .card {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+
+        body {
+            background-color: #000;
+            color: #fff;
         }
-        h2 {
-            color: #333;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        textarea {
-            width: 100%;
-            height: 150px;
-            padding: 15px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-            resize: none;
-            margin-bottom: 15px;
-        }
-        textarea:focus {
-            outline: none;
-            border-color: #4CAF50;
-        }
-        .counter {
+
+        /* ===== Header ===== */
+        .header {
+            background-color: #1f2a37;
+            padding: 15px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px;
-            background: #f8f8f8;
-            border-radius: 8px;
         }
-        .count {
-            font-size: 24px;
-            font-weight: bold;
-            color: #333;
+
+        .header h2 {
+            color: #fff;
         }
-        .limit {
-            color: #666;
+
+        .nav a {
+            color: #fff;
+            margin-left: 20px;
+            text-decoration: underline;
+            font-size: 15px;
         }
-        .status {
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 14px;
+
+        /* ===== Main Content ===== */
+        .container {
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .container h1 {
+            font-size: 36px;
+            margin-bottom: 40px;
+        }
+
+        textarea {
+            width: 70%;
+            height: 80px;
+            font-size: 18px;
+            padding: 15px;
+            border-radius: 4px;
+            border: none;
+            outline: none;
+            resize: none;
+        }
+
+        .counter {
+            margin-top: 15px;
+            font-size: 18px;
         }
     </style>
 </head>
+
 <body>
-    <div class="card">
-        <h2>Character Counter</h2>
-        
-        <textarea id="textInput" placeholder="Type your text here..."></textarea>
-        
-        <div class="counter">
-            <div>
-                <span class="count" id="count">0</span>
-                <span class="limit">/100 characters</span>
-            </div>
-            <div class="status safe" id="status">✓ Good</div>
+
+    <!-- Header -->
+    <div class="header">
+        <h2>Experiment 2</h2>
+        <div class="nav">
+            <a href="#">Experiment 2.1</a>
+            <a href="#">Experiment 2.2</a>
+            <a href="#">Experiment 2.3</a>
         </div>
     </div>
 
+    <!-- Main Content -->
+    <div class="container">
+        <h1>Word Counter</h1>
+
+        <textarea id="textInput" placeholder=""></textarea>
+
+        <div class="counter">
+            <span id="count">0</span>/150 Letters
+        </div>
+    </div>
+
+    <!-- JavaScript -->
     <script>
-        const textarea = document.getElementById('textInput');
-        const countDisplay = document.getElementById('count');
-        const statusDisplay = document.getElementById('status');
-        const LIMIT = 100;
+        const textarea = document.getElementById("textInput");
+        const count = document.getElementById("count");
+        const limit = 150;
 
-        function updateCounter() {
-            const count = textarea.value.length;
-            countDisplay.textContent = count;
-            
-            if (count === 0) {
-                statusDisplay.textContent = "Start typing";
-                statusDisplay.className = "status safe";
-            } else if (count <= LIMIT * 0.8) {
-                statusDisplay.textContent = "✓ Good";
-                statusDisplay.className = "status safe";
-            } else if (count <= LIMIT) {
-                statusDisplay.textContent = "⚠ Warning";
-                statusDisplay.className = "status warning";
-            } else {
-                statusDisplay.textContent = "✗ Over limit";
-                statusDisplay.className = "status danger";
+        textarea.addEventListener("input", () => {
+            let length = textarea.value.length;
+            count.textContent = length;
+
+            if (length > limit) {
+                textarea.value = textarea.value.substring(0, limit);
+                count.textContent = limit;
             }
-        }
-
-        textarea.addEventListener('input', updateCounter);
+        });
     </script>
+
 </body>
 </html>
