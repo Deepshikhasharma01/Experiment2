@@ -5,13 +5,11 @@
     Objective  : To count the number of characters entered by the user
                  and display it dynamically using JavaScript.
 -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Experiment 2.1 - Word Counter</title>
-
     <style>
         * {
             margin: 0;
@@ -19,13 +17,10 @@
             box-sizing: border-box;
             font-family: Arial, sans-serif;
         }
-
         body {
             background-color: #000;
             color: #fff;
         }
-
-        /* ===== Header ===== */
         .header {
             background-color: #1f2a37;
             padding: 15px 40px;
@@ -33,29 +28,23 @@
             justify-content: space-between;
             align-items: center;
         }
-
         .header h2 {
             color: #fff;
         }
-
         .nav a {
             color: #fff;
             margin-left: 20px;
             text-decoration: underline;
             font-size: 15px;
         }
-
-        /* ===== Main Content ===== */
         .container {
             text-align: center;
             margin-top: 80px;
         }
-
         .container h1 {
             font-size: 36px;
             margin-bottom: 40px;
         }
-
         textarea {
             width: 70%;
             height: 80px;
@@ -66,17 +55,13 @@
             outline: none;
             resize: none;
         }
-
         .counter {
             margin-top: 15px;
             font-size: 18px;
         }
     </style>
 </head>
-
 <body>
-
-    <!-- Header -->
     <div class="header">
         <h2>Experiment 2</h2>
         <div class="nav">
@@ -85,34 +70,25 @@
             <a href="#">Experiment 2.3</a>
         </div>
     </div>
-
-    <!-- Main Content -->
     <div class="container">
         <h1>Word Counter</h1>
-
         <textarea id="textInput" placeholder=""></textarea>
-
         <div class="counter">
             <span id="count">0</span>/150 Letters
         </div>
     </div>
-
-    <!-- JavaScript -->
     <script>
         const textarea = document.getElementById("textInput");
         const count = document.getElementById("count");
         const limit = 150;
-
         textarea.addEventListener("input", () => {
             let length = textarea.value.length;
             count.textContent = length;
-
             if (length > limit) {
                 textarea.value = textarea.value.substring(0, limit);
                 count.textContent = limit;
             }
         });
     </script>
-
 </body>
 </html>
